@@ -3,7 +3,9 @@ import { useChat } from 'ai/react'
 import { Spinner } from './ui/spinner'
 
 export function Chat() {
-  const { messages, input, handleInputChange, handleSubmit, status, stop } = useChat()
+  const { messages, setMessages, input, handleInputChange, handleSubmit, status, stop, error, reload } = useChat()
+
+  const buttonClass = 'flex px-2 border rounded items-center'
 
   return (
     <div className="flex flex-col w-full max-w-md mx-auto h-screen">
@@ -18,9 +20,19 @@ export function Chat() {
 
       {(status === 'submitted' || status === 'streaming') && (
         <div>
-          {status === 'submitted' && <Spinner />}
-          <button type='button' className="flex-1 px-1 border rounded" onClick={() => stop()}>
+          <button type='button' className={buttonClass} onClick={() => stop()}>
             cancel
+          </button>
+        </div>
+      )}
+
+      {error && (
+        <div>
+          <div>
+            error communicating with AI
+          </div>
+          <button type='button' className={buttonClass} onClick={() => reload()}>
+            retry
           </button>
         </div>
       )}
@@ -31,9 +43,14 @@ export function Chat() {
           onChange={handleInputChange}
           placeholder="Say something..."
           className="flex-1 p-2 border rounded"
+          disabled={error != null}
         />
-        <button type="submit">Send</button>
+        {(status === 'ready') ?
+          (<button type='submit' className={buttonClass}>Send</button>) :
+          (<Spinner />)
+        }
+
       </form>
-    </div>
+    </div >
   )
 }
