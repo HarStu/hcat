@@ -3,12 +3,20 @@ import type { Message } from 'ai'
 import { existsSync, mkdirSync } from 'fs'
 import { writeFile, readFile } from 'fs/promises'
 import path from 'path'
+import { db } from '~/server/db/db'
+import { chats } from '~/server/db/schema'
 
 export async function createChat(): Promise<String> {
-  const id = generateId()
   // TEMP PLACEHOLDER -- SHOULD BE REPLACED WITH DB IMPLEMENTATION
-  await writeFile(getChatFile(id), '[]') // create 
-  return id
+  const newId = generateId()
+  await writeFile(getChatFile(newId), '[]') // create chat file
+
+  await db.insert(chats).values({
+    id: newId as string,
+    createdAt: new Date()
+  })
+
+  return newId
 }
 
 function getChatFile(id: string): string {
@@ -26,4 +34,5 @@ export async function loadChat(id: string): Promise<Message[]> {
 export async function saveChat({ id, messages }: { id: string, messages: Message[] }): Promise<void> {
   const content = JSON.stringify(messages, null, 2);
   await writeFile(getChatFile(id), content)
+  console.log(await readFile(getChatFile(id), 'utf8'))
 }
