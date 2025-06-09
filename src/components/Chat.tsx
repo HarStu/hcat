@@ -1,5 +1,6 @@
 'use client'
 import { useChat } from 'ai/react'
+import { Spinner } from './ui/spinner'
 
 export function Chat() {
   const { messages, input, handleInputChange, handleSubmit, status, stop } = useChat()
@@ -17,8 +18,8 @@ export function Chat() {
 
       {(status === 'submitted' || status === 'streaming') && (
         <div>
-          {status === 'submitted' && <div>*</div>}
-          <button type='button' onClick={() => stop()}>
+          {status === 'submitted' && <Spinner />}
+          <button type='button' className="flex-1 px-1 border rounded" onClick={() => stop()}>
             cancel
           </button>
         </div>
