@@ -1,6 +1,6 @@
 import { openai } from '@ai-sdk/openai';
 import { streamText } from 'ai';
-import type { Message, UIMessage } from 'ai';
+import type { Message } from 'ai';
 
 // Allowing streaming responses up to 30 seconds
 export const maxDuration = 30;
