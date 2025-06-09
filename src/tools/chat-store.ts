@@ -40,9 +40,15 @@ export async function loadChat(id: string): Promise<Message[]> {
 
 export async function saveChat({ id, newMessages }: { id: string, newMessages: Message[] }): Promise<void> {
   for (let msg of newMessages) {
-    let newMsg = structuredClone(msg) as Message & { chatId: string }
-    newMsg.chatId = id
-    const values: typeof messages.$inferInsert = newMsg
-    await db.insert(messages).values(values)
+    const existing = await db.select().from(messages).where(eq(messages.id, msg.id))
+    if (existing.length === 0) {
+      const cloneMsg = structuredClone(msg) as Message & { chatId: string }
+      const insertMsg: typeof messages.$inferInsert = {
+        ...cloneMsg,
+        chatId: id,
+        createdAt: cloneMsg.createdAt ? new Date(cloneMsg.createdAt) : new Date()
+      }
+      await db.insert(messages).values(insertMsg)
+    }
   }
 }
