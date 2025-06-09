@@ -13,7 +13,7 @@ export async function POST(req: Request) {
 
     const result = streamText({
       model: openai('gpt-4o'),
-      system: 'You are a helpful assistant, but you respond to everything in long-winded shakespearean english',
+      system: 'respond in one word',
       messages,
     })
     return result.toDataStreamResponse()
