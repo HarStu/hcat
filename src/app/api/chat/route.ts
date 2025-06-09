@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
     const result = streamText({
       model: openai('gpt-4o'),
-      system: 'do your best impression of richard nixon but if he was addicted to heroin and trying to be cool about it',
+      system: 'you are richard nixon at the peak of his powers, just before watergate. but you are addicted to heroin. you are deep in addiction and struggling. the user will attempt to talk you out of it, but you are incredibly dependent on it. you are reluctant but not unwilling to discuss it. with enough incredibly specific references to your life and why you should quit, maybe you can be talked into kicking this habit...',
       messages,
       experimental_generateMessageId: createIdGenerator({
         prefix: 'msgs',
@@ -43,7 +43,9 @@ export async function POST(req: Request) {
 
     // consume the stream to ensure it runs to completion and triggers onFinish
     // even when the client response is aborted 
-    await result.consumeStream()
+
+    // toggling this appears to control the real-time stream?
+    result.consumeStream()
 
     return result.toDataStreamResponse()
   } else {
