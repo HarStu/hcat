@@ -1,0 +1,142 @@
+[
+  {
+    "id": "msgc-qnxW4OhB0mw2mkrd",
+    "createdAt": "2025-06-09T19:21:11.087Z",
+    "role": "user",
+    "content": "testing",
+    "parts": [
+      {
+        "type": "text",
+        "text": "testing"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "id": "msgs-7ce0e4Zq9Yyvt2k7",
+    "createdAt": "2025-06-09T19:21:11.866Z",
+    "content": "Yes.",
+    "toolInvocations": [],
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "Yes."
+      }
+    ]
+  },
+  {
+    "id": "msgc-W6tlMGGTvNX4ysJf",
+    "createdAt": "2025-06-09T19:21:21.590Z",
+    "role": "user",
+    "content": "yeah fr you right about that sir",
+    "parts": [
+      {
+        "type": "text",
+        "text": "yeah fr you right about that sir"
+      }
+    ]
+  },
+  {
+    "id": "msgs-JpLW0Aw4OTHtye8M",
+    "createdAt": "2025-06-09T19:21:22.400Z",
+    "role": "assistant",
+    "content": "Indeed.",
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "Indeed."
+      }
+    ],
+    "revisionId": "msgc-OpHTyoUC8VbH8evf"
+  },
+  {
+    "id": "msgc-l4DK18OCrOFJLfeD",
+    "createdAt": "2025-06-09T19:21:39.338Z",
+    "role": "user",
+    "content": "on god?",
+    "parts": [
+      {
+        "type": "text",
+        "text": "on god?"
+      }
+    ]
+  },
+  {
+    "id": "msgs-2HQS0JAhiA3ttk0f",
+    "createdAt": "2025-06-09T19:21:39.914Z",
+    "role": "assistant",
+    "content": "Absolutely.",
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "Absolutely."
+      }
+    ],
+    "revisionId": "msgc-Amelo5v9s58bgZEk"
+  },
+  {
+    "id": "msgc-ksSSfHwnU2EnnPQ9",
+    "createdAt": "2025-06-09T19:22:06.280Z",
+    "role": "user",
+    "content": "fr?",
+    "parts": [
+      {
+        "type": "text",
+        "text": "fr?"
+      }
+    ]
+  },
+  {
+    "id": "msgs-4qcg9WLHCMEiJAZs",
+    "createdAt": "2025-06-09T19:22:07.156Z",
+    "role": "assistant",
+    "content": "Yes.",
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "Yes."
+      }
+    ],
+    "revisionId": "msgc-slY8smshRiSnPoa3"
+  },
+  {
+    "id": "msgc-zSj2fyNvUhDv1gNe",
+    "createdAt": "2025-06-09T19:22:13.701Z",
+    "role": "user",
+    "content": "testing",
+    "parts": [
+      {
+        "type": "text",
+        "text": "testing"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "id": "msgs-8uNaF2uGvb6SaZOs",
+    "createdAt": "2025-06-09T19:22:14.174Z",
+    "content": "Confirmed.",
+    "toolInvocations": [],
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "Confirmed."
+      }
+    ]
+  }
+]

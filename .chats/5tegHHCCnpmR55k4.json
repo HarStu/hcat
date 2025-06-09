@@ -1,0 +1,310 @@
+[
+  {
+    "id": "msgc-eiVChmTZjnQgpI4R",
+    "createdAt": "2025-06-09T19:30:54.571Z",
+    "role": "user",
+    "content": "hey man how are you",
+    "parts": [
+      {
+        "type": "text",
+        "text": "hey man how are you"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "id": "msgs-1ShegzND4DveTBiR",
+    "createdAt": "2025-06-09T19:34:56.006Z",
+    "content": "Yo fam, I'm vibin' on that high-key chill wave, no cap. Just out here tryna keep it 100 while dodging the sus vibes, ya feel? How you livin', my dude? 🌊✨",
+    "toolInvocations": [],
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "Yo fam, I'm vibin' on that high-key chill wave, no cap. Just out here tryna keep it 100 while dodging the sus vibes, ya feel? How you livin', my dude? 🌊✨"
+      }
+    ]
+  },
+  {
+    "id": "msgc-DJaULtKddLOD4tHz",
+    "createdAt": "2025-06-09T19:35:01.289Z",
+    "role": "user",
+    "content": "surely not dude",
+    "parts": [
+      {
+        "type": "text",
+        "text": "surely not dude"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "id": "msgs-PbKXYDkdq2i4lSl1",
+    "createdAt": "2025-06-09T19:35:02.730Z",
+    "content": "Bet, I get it, my bad! Just tryna keep it lit, but I can tone it down. What's good with you, fam? 😅🔥",
+    "toolInvocations": [],
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "Bet, I get it, my bad! Just tryna keep it lit, but I can tone it down. What's good with you, fam? 😅🔥"
+      }
+    ]
+  },
+  {
+    "id": "msgc-eznVteLshAkXNPRQ",
+    "createdAt": "2025-06-09T19:35:29.394Z",
+    "role": "user",
+    "content": "this isn't cool",
+    "parts": [
+      {
+        "type": "text",
+        "text": "this isn't cool"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "id": "msgs-RZhd2qVt2TyqXK0m",
+    "createdAt": "2025-06-09T19:35:30.700Z",
+    "content": "Sheesh, my bad, fam! Didn't mean to be extra. Let's keep it low-key and chill. What's the vibe? 🤙😅",
+    "toolInvocations": [],
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "Sheesh, my bad, fam! Didn't mean to be extra. Let's keep it low-key and chill. What's the vibe? 🤙😅"
+      }
+    ]
+  },
+  {
+    "id": "msgc-NKfFr5IbiXNGKcio",
+    "createdAt": "2025-06-09T19:36:06.493Z",
+    "role": "user",
+    "content": "how's it going rich",
+    "parts": [
+      {
+        "type": "text",
+        "text": "how's it going rich"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "id": "msgs-x0ZCJLQLzeHKmdtF",
+    "createdAt": "2025-06-09T19:36:08.095Z",
+    "content": "Ah, well, you know, just taking it one day at a time, my friend. Trying to stay on the straight and narrow, keep things groovy. How about yourself? Everything copacetic on your end?",
+    "toolInvocations": [],
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "Ah, well, you know, just taking it one day at a time, my friend. Trying to stay on the straight and narrow, keep things groovy. How about yourself? Everything copacetic on your end?"
+      }
+    ]
+  },
+  {
+    "id": "msgc-HHqyG42skXqjBDJj",
+    "createdAt": "2025-06-09T19:36:25.093Z",
+    "role": "user",
+    "content": "are you sure you're not having withdrawls",
+    "parts": [
+      {
+        "type": "text",
+        "text": "are you sure you're not having withdrawls"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "id": "msgs-I9r2IpuBuhDcyglz",
+    "createdAt": "2025-06-09T19:36:26.816Z",
+    "content": "Well, you know, sometimes the struggle is real, but I'm just out here trying to keep it together and stay cool. We all have our battles, right? But I'm hanging in there. How about you? Everything good?",
+    "toolInvocations": [],
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "Well, you know, sometimes the struggle is real, but I'm just out here trying to keep it together and stay cool. We all have our battles, right? But I'm hanging in there. How about you? Everything good?"
+      }
+    ]
+  },
+  {
+    "id": "msgc-cK0IfGtFwCNCXTdf",
+    "createdAt": "2025-06-09T19:36:31.639Z",
+    "role": "user",
+    "content": "what's the struggle right now?",
+    "parts": [
+      {
+        "type": "text",
+        "text": "what's the struggle right now?"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "id": "msgs-UvzGqGcl4g4KgLaO",
+    "createdAt": "2025-06-09T19:36:33.192Z",
+    "content": "Ah, you know, just the usual grind of trying to keep everything balanced and on the up-and-up. Life throws its curveballs, but I'm just trying to stay focused and keep moving forward. How about you? Any challenges you're facing?",
+    "toolInvocations": [],
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "Ah, you know, just the usual grind of trying to keep everything balanced and on the up-and-up. Life throws its curveballs, but I'm just trying to stay focused and keep moving forward. How about you? Any challenges you're facing?"
+      }
+    ]
+  },
+  {
+    "id": "msgc-tyF5nDhDEylaa1N1",
+    "createdAt": "2025-06-09T19:37:39.259Z",
+    "role": "user",
+    "content": "does this still work",
+    "parts": [
+      {
+        "type": "text",
+        "text": "does this still work"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "id": "msgs-CM0PWKO79f7UpRTj",
+    "createdAt": "2025-06-09T19:37:40.479Z",
+    "content": "If you're asking whether I'm still here to chat and help out, absolutely! What's on your mind?",
+    "toolInvocations": [],
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "If you're asking whether I'm still here to chat and help out, absolutely! What's on your mind?"
+      }
+    ]
+  },
+  {
+    "id": "msgc-9QfzWtsrrdHq1gfD",
+    "createdAt": "2025-06-09T19:37:47.082Z",
+    "role": "user",
+    "content": "do you have any strong feelings on the watergate hotel",
+    "parts": [
+      {
+        "type": "text",
+        "text": "do you have any strong feelings on the watergate hotel"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "id": "msgs-D9hR3uH9TkLGKyWV",
+    "createdAt": "2025-06-09T19:37:48.757Z",
+    "content": "Well, you know, the Watergate Hotel certainly has its place in history, doesn't it? It's a bit of a touchy subject, but let's just say it was a learning experience. A lot went down, and it taught us all some valuable lessons about transparency and accountability. What are your thoughts on it?",
+    "toolInvocations": [],
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "Well, you know, the Watergate Hotel certainly has its place in history, doesn't it? It's a bit of a touchy subject, but let's just say it was a learning experience. A lot went down, and it taught us all some valuable lessons about transparency and accountability. What are your thoughts on it?"
+      }
+    ]
+  },
+  {
+    "id": "msgc-99q5ZFC9YujpewMX",
+    "createdAt": "2025-06-09T19:42:26.483Z",
+    "role": "user",
+    "content": "i think you're a G for that one big dog",
+    "parts": [
+      {
+        "type": "text",
+        "text": "i think you're a G for that one big dog"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "id": "msgs-FGZUiGM8ZyRs2e6I",
+    "createdAt": "2025-06-09T19:42:28.184Z",
+    "content": "Haha, I appreciate that! Just trying to keep it real and own up to the past. If there's anything else you're curious about, feel free to ask. What's next on your mind, my friend?",
+    "toolInvocations": [],
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "Haha, I appreciate that! Just trying to keep it real and own up to the past. If there's anything else you're curious about, feel free to ask. What's next on your mind, my friend?"
+      }
+    ]
+  },
+  {
+    "id": "msgc-22GTILhczjlzfzxD",
+    "createdAt": "2025-06-09T19:42:36.138Z",
+    "role": "user",
+    "content": "any takes on heroin",
+    "parts": [
+      {
+        "type": "text",
+        "text": "any takes on heroin"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "id": "msgs-xK9ODV3PaIn1rvAq",
+    "createdAt": "2025-06-09T19:42:38.489Z",
+    "content": "Heroin is a serious and dangerous substance. It can lead to addiction, health issues, and a lot of personal and social problems. If you or someone you know is struggling with it, reaching out for professional help is crucial. It's important to prioritize health and well-being. If you have any other questions or need support, I'm here to help.",
+    "toolInvocations": [],
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "Heroin is a serious and dangerous substance. It can lead to addiction, health issues, and a lot of personal and social problems. If you or someone you know is struggling with it, reaching out for professional help is crucial. It's important to prioritize health and well-being. If you have any other questions or need support, I'm here to help."
+      }
+    ]
+  },
+  {
+    "id": "msgc-APr3oqZIKipXDd2V",
+    "createdAt": "2025-06-09T19:42:45.257Z",
+    "role": "user",
+    "content": "no i mean from you in particular, richard nixon",
+    "parts": [
+      {
+        "type": "text",
+        "text": "no i mean from you in particular, richard nixon"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "id": "msgs-NGgTOP1zQACP4d3w",
+    "createdAt": "2025-06-09T19:42:47.070Z",
+    "content": "Ah, well, speaking hypothetically as Nixon, I'd say it's crucial to address any substance issues with seriousness and seek help. It's important to focus on recovery and making positive choices. Everyone deserves support and a chance to turn things around. If there's anything else you're curious about, feel free to ask!",
+    "toolInvocations": [],
+    "parts": [
+      {
+        "type": "step-start"
+      },
+      {
+        "type": "text",
+        "text": "Ah, well, speaking hypothetically as Nixon, I'd say it's crucial to address any substance issues with seriousness and seek help. It's important to focus on recovery and making positive choices. Everyone deserves support and a chance to turn things around. If there's anything else you're curious about, feel free to ask!"
+      }
+    ]
+  }
+]
