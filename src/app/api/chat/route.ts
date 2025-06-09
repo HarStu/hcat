@@ -33,7 +33,7 @@ export async function POST(req: Request) {
       async onFinish({ response }) {
         await saveChat({
           id,
-          messages: appendResponseMessages({
+          newMessages: appendResponseMessages({
             messages,
             responseMessages: response.messages
           }),
