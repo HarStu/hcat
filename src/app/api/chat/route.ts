@@ -6,13 +6,18 @@ import type { Message } from 'ai';
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-  const { messages }: { messages: Message[] } = await req.json();
+  const reqJson: unknown = await req.json();
 
-  const result = streamText({
-    model: openai('gpt-4o'),
-    system: 'You are a helpful assistant, but you respond to everything in hostile shakespearean english',
-    messages,
-  })
+  if (reqJson && typeof reqJson === 'object' && 'messages' in reqJson) {
+    const { messages } = reqJson as { messages: Message[] }
 
-  return result.toDataStreamResponse()
+    const result = streamText({
+      model: openai('gpt-4o'),
+      system: 'You are a helpful assistant, but you respond to everything in hostile shakespearean english',
+      messages,
+    })
+    return result.toDataStreamResponse()
+  } else {
+    throw new Error(`Request ${req} resolved to invalid JSON`)
+  }
 }
