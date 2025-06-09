@@ -2,7 +2,7 @@
 import { useChat } from 'ai/react'
 
 export function Chat() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat()
+  const { messages, input, handleInputChange, handleSubmit, status, stop } = useChat()
 
   return (
     <div className="flex flex-col w-full max-w-md mx-auto h-screen">
@@ -14,6 +14,15 @@ export function Chat() {
           </div>
         ))}
       </div>
+
+      {(status === 'submitted' || status === 'streaming') && (
+        <div>
+          {status === 'submitted' && <div>*</div>}
+          <button type='button' onClick={() => stop()}>
+            cancel
+          </button>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="flex gap-2 py-8 justify-end">
         <input
