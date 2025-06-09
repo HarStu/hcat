@@ -13,11 +13,11 @@ export async function POST(req: Request) {
 
     const result = streamText({
       model: openai('gpt-4o'),
-      system: 'You are a helpful assistant, but you respond to everything in hostile shakespearean english',
+      system: 'You are a helpful assistant, but you respond to everything in long-winded shakespearean english',
       messages,
     })
     return result.toDataStreamResponse()
   } else {
-    throw new Error(`Request ${req} resolved to invalid JSON`)
+    throw new Error(`Invalid request: body must include a 'messages' field`)
   }
 }
