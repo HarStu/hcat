@@ -7,12 +7,12 @@ export function Chat() {
   const { messages, input, handleInputChange, handleSubmit, status, stop, error, reload } = useChat()
 
   const buttonClass = 'flex px-2 min-w-16 border rounded items-center justify-center'
-  const messagesContainerClass = 'flex-1 border rounded p-4 mb-0 overflow-y-auto transition-all duration-900 ease-in-out'
+  const messagesContainerClass = 'flex-1 border rounded p-4 mb-0 mt-4 overflow-y-auto transition-all duration-900 ease-in-out'
 
   const generating = (status === 'submitted' || status === 'streaming')
 
   return (
-    <div className="flex flex-col w-full max-w-md mx-auto h-screen">
+    <div className="flex flex-col w-full max-w-md mx-auto h-screen bg-background">
       <div className={clsx(messagesContainerClass)}>
         {messages.map(m => (
           <div key={m.id} className="mb-4">
@@ -39,7 +39,7 @@ export function Chat() {
         )
       }
 
-      <form onSubmit={handleSubmit} className="flex gap-2 pb-4 justify-end">
+      <form onSubmit={handleSubmit} className="flex gap-2 pb-6 justify-end">
         <input
           value={input}
           onChange={handleInputChange}
