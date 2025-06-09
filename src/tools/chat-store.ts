@@ -17,12 +17,12 @@ function mapDbMsgToMessage(dbMessage: DbMessage): Message {
   }
 }
 
-export async function createChat(): Promise<String> {
+export async function createChat(): Promise<string> {
   // TEMP PLACEHOLDER -- SHOULD BE REPLACED WITH DB IMPLEMENTATION
   const newId = generateId()
 
   await db.insert(chats).values({
-    id: newId as string,
+    id: newId,
     createdAt: new Date()
   })
 
@@ -36,7 +36,7 @@ export async function loadChat(id: string): Promise<Message[]> {
 }
 
 export async function saveChat({ id, newMessages }: { id: string, newMessages: Message[] }): Promise<void> {
-  for (let msg of newMessages) {
+  for (const msg of newMessages) {
     const existing = await db.select().from(messages).where(eq(messages.id, msg.id))
     if (existing.length === 0) {
       const cloneMsg = structuredClone(msg) as Message & { chatId: string }
