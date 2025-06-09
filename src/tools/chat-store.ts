@@ -1,29 +1,51 @@
 import { generateId } from 'ai'
 import type { Message } from 'ai'
-import { existsSync, mkdirSync } from 'fs'
-import { writeFile, readFile } from 'fs/promises'
-import path from 'path'
+import { db } from '~/server/db/db'
+import { eq, asc } from 'drizzle-orm'
+import { chats, messages } from '~/server/db/schema'
 
-export async function createChat(): Promise<String> {
-  const id = generateId()
-  // TEMP PLACEHOLDER -- SHOULD BE REPLACED WITH DB IMPLEMENTATION
-  await writeFile(getChatFile(id), '[]') // create 
-  return id
+type DbMessage = typeof messages.$inferSelect
+
+function mapDbMsgToMessage(dbMessage: DbMessage): Message {
+  return {
+    id: dbMessage.id,
+    parts: dbMessage.parts as Message['parts'],
+    role: dbMessage.role as Message['role'],
+    content: dbMessage.content,
+    createdAt: dbMessage.createdAt ? new Date(dbMessage.createdAt) : undefined,
+    toolInvocations: dbMessage.toolInvocations as Message['toolInvocations'] ?? undefined
+  }
 }
 
-function getChatFile(id: string): string {
-  const chatDir = path.join(process.cwd(), '.chats')
-  if (!existsSync(chatDir)) {
-    mkdirSync(chatDir, { recursive: true })
-  }
-  return path.join(chatDir, `${id}.json`)
+export async function createChat(): Promise<string> {
+  // TEMP PLACEHOLDER -- SHOULD BE REPLACED WITH DB IMPLEMENTATION
+  const newId = generateId()
+
+  await db.insert(chats).values({
+    id: newId,
+    createdAt: new Date()
+  })
+
+  return newId
 }
 
 export async function loadChat(id: string): Promise<Message[]> {
-  return JSON.parse(await readFile(getChatFile(id), 'utf8'))
+  const res = await db.select().from(messages).where(eq(messages.chatId, id)).orderBy(asc(messages.createdAt))
+  const retrievedMessages: Message[] = res.map(msg => mapDbMsgToMessage(msg))
+  return retrievedMessages
 }
 
-export async function saveChat({ id, messages }: { id: string, messages: Message[] }): Promise<void> {
-  const content = JSON.stringify(messages, null, 2);
-  await writeFile(getChatFile(id), content)
+export async function saveChat({ id, newMessages }: { id: string, newMessages: Message[] }): Promise<void> {
+  for (const msg of newMessages) {
+    const existing = await db.select().from(messages).where(eq(messages.id, msg.id))
+    if (existing.length === 0) {
+      const cloneMsg = structuredClone(msg) as Message & { chatId: string }
+      const insertMsg: typeof messages.$inferInsert = {
+        ...cloneMsg,
+        chatId: id,
+        createdAt: cloneMsg.createdAt ? new Date(cloneMsg.createdAt) : new Date()
+      }
+      await db.insert(messages).values(insertMsg)
+    }
+  }
 }

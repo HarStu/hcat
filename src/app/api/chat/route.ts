@@ -33,7 +33,7 @@ export async function POST(req: Request) {
       async onFinish({ response }) {
         await saveChat({
           id,
-          messages: appendResponseMessages({
+          newMessages: appendResponseMessages({
             messages,
             responseMessages: response.messages
           }),
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
 
     // consume the stream to ensure it runs to completion and triggers onFinish
     // even when the client response is aborted 
-    result.consumeStream()
+    await result.consumeStream()
 
     return result.toDataStreamResponse()
   } else {
