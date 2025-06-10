@@ -1,7 +1,7 @@
 'use client'
-import { useEffect, useRef } from 'react'
-import { useChat } from 'ai/react'
-import type { Message } from 'ai/react'
+import { useEffect, useRef, useState } from 'react'
+import { useChat } from '@ai-sdk/react'
+import type { Message } from '@ai-sdk/react'
 import { createIdGenerator } from 'ai'
 import { Spinner } from './ui/spinner'
 import clsx from 'clsx'
@@ -11,6 +11,7 @@ type ChatProps = {
   initialMessages?: Message[]
 }
 export default function Chat(chatProps: ChatProps = {}) {
+
   const { messages, input, handleInputChange, handleSubmit, status, stop, error, reload } = useChat({
     id: chatProps.id,
     initialMessages: chatProps.initialMessages,
@@ -19,15 +20,38 @@ export default function Chat(chatProps: ChatProps = {}) {
       prefix: 'msgc',
       size: 16,
     }),
+    maxSteps: 5,
+    async onToolCall({ toolCall }) {
+      if (toolCall.toolName === 'winTheGame') {
+        console.log("You win")
+        setWin(true)
+        return true
+      }
+    },
     experimental_prepareRequestBody({ messages, id }) {
       return { message: messages[messages.length - 1], id }
     }
   })
 
+  const [win, setWin] = useState(false)
+
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
+
+  useEffect(() => {
+    console.log('full messages content')
+    for (const msg of messages) {
+      if (msg.toolInvocations) {
+        for (const toolUse of msg.toolInvocations) {
+          if (toolUse.toolName == 'winTheGame') {
+            setWin(true)
+          }
+        }
+      }
+    }
   }, [messages])
 
   const buttonClass = 'flex px-2 min-w-16 border rounded items-center justify-center'
@@ -37,7 +61,7 @@ export default function Chat(chatProps: ChatProps = {}) {
 
   return (
     <div className="flex flex-col w-full max-w-md mx-auto h-screen bg-background">
-      <div className={clsx(messagesContainerClass)}>
+      <div className={clsx((messagesContainerClass), win && 'border-green-500')}>
         {messages.map(m => (
           <div key={m.id} className="mb-4">
             <strong>{m.role}: </strong>
