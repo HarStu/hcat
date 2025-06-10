@@ -4,6 +4,8 @@ import { db } from '~/server/db/db'
 import { eq, asc } from 'drizzle-orm'
 import { chats, messages } from '~/server/db/schema'
 
+import type { Game } from '~/lib/games'
+
 type DbMessage = typeof messages.$inferSelect
 
 function mapDbMsgToMessage(dbMessage: DbMessage): Message {
@@ -17,13 +19,16 @@ function mapDbMsgToMessage(dbMessage: DbMessage): Message {
   }
 }
 
-export async function createChat(): Promise<string> {
+export async function createChat(game: Game): Promise<string> {
   // TEMP PLACEHOLDER -- SHOULD BE REPLACED WITH DB IMPLEMENTATION
   const newId = generateId()
 
   await db.insert(chats).values({
     id: newId,
-    createdAt: new Date()
+    createdAt: new Date(),
+    systemPrompt: game.systemPrompt,
+    gameName: game.name,
+    requiredTools: game.requiredTools
   })
 
   return newId
