@@ -34,17 +34,17 @@ export async function createChat(game: Game): Promise<string> {
   return newId
 }
 
-export async function loadChat(id: string): Promise<[Message[], string]> {
+export async function loadChat(id: string): Promise<[Message[], string, string[]]> {
   const msgRes = await db.select().from(messages).where(eq(messages.chatId, id)).orderBy(asc(messages.createdAt))
   const retrievedMessages: Message[] = msgRes.map(msg => mapDbMsgToMessage(msg))
 
-  const promptRes = await db.select({ prompt: chats.systemPrompt }).from(chats).where(eq(chats.id, id))
-  if (promptRes.length !== 1) {
+  const chatRes = await db.select({ prompt: chats.systemPrompt, tools: chats.requiredTools }).from(chats).where(eq(chats.id, id))
+  if (chatRes.length !== 1) {
     throw new Error(`Could not properly fetch system prompt for chat ${id}`)
   } else {
-    const { prompt } = promptRes[0]!
-
-    return [retrievedMessages, prompt!]
+    const { prompt, tools } = chatRes[0]!
+    const toolsArr = tools as string[]
+    return [retrievedMessages, prompt!, toolsArr]
   }
 }
 

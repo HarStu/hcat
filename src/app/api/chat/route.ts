@@ -1,9 +1,12 @@
 import { openai } from '@ai-sdk/openai';
+import { google } from '@ai-sdk/google';
 import { appendResponseMessages, streamText, createIdGenerator } from 'ai';
 import type { Message } from 'ai';
 import { appendClientMessage } from 'ai';
 import { saveChat, loadChat } from '~/tools/chat-store'
 import { z } from 'zod';
+
+import { tools } from '~/lib/model_tools'
 
 // Allowing streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -15,7 +18,8 @@ export async function POST(req: Request) {
     // get the last message from the client
     const { message, id } = reqJson as { message: Message, id: string }
 
-    const [previousMessages, gamePrompt] = await loadChat(id);
+    // grab previous messages and the prompt for the game
+    const [previousMessages, gamePrompt, requiredTools] = await loadChat(id);
 
     // append the new message to the previous messages 
     const messages = appendClientMessage({
@@ -23,20 +27,33 @@ export async function POST(req: Request) {
       message
     })
 
+    // configure the model to use
+    const PROVIDER = process.env.PROVIDER
+    let model = undefined
+    if (PROVIDER === 'google') {
+      model = google('gemini-2.0-flash')
+    } else if (PROVIDER === 'openai') {
+      model = openai('gpt-4o-mini')
+    } else {
+      throw new Error('No valid model provider configured!')
+    }
+
+    // setup the tools available to the model
+
     const result = streamText({
-      model: openai('gpt-4o'),
+      model: model,
       system: gamePrompt,
       messages,
       tools: {
         winTheGame: {
-          description: "Execute when the player has won the game being played",
+          description: "Use when the player has achieved the goal described in the system prompt",
           parameters: z.object({}),
           execute: async ({ }) => {
             return true
           }
         },
         loseTheGame: {
-          description: "Execute when the player has lost the game being played",
+          description: "Use when the player has failed at the goal described in the system prompt, such that the scenairo cannot continue",
           parameters: z.object({}),
           execute: async ({ }) => {
             return true
