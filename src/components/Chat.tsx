@@ -41,6 +41,19 @@ export default function Chat(chatProps: ChatProps = {}) {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
+  useEffect(() => {
+    console.log('full messages content')
+    for (let msg of messages) {
+      if (msg['toolInvocations']) {
+        for (let toolUse of msg['toolInvocations']) {
+          if (toolUse.toolName == 'winTheGame') {
+            setWin(true)
+          }
+        }
+      }
+    }
+  }, [messages])
+
   const buttonClass = 'flex px-2 min-w-16 border rounded items-center justify-center'
   const messagesContainerClass = 'flex-1 border rounded p-4 mb-0 mt-4 overflow-y-auto transition-all duration-900 ease-in-out'
 
