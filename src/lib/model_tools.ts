@@ -1,6 +1,8 @@
 import { z } from 'zod';
 
-export const tools = {
+export type ToolName = 'winTheGame' | 'loseTheGame'
+
+export const model_tools = {
   winTheGame: {
     description: "Use when the player has won the game you are roleplaying",
     parameters: z.object({}),
@@ -15,6 +17,5 @@ export const tools = {
       return true
     }
   }
-
 }
 

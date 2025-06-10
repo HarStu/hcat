@@ -5,6 +5,7 @@ import { eq, asc } from 'drizzle-orm'
 import { chats, messages } from '~/server/db/schema'
 
 import type { Game } from '~/lib/games'
+import type { ToolName } from '~/lib/model_tools'
 
 type DbMessage = typeof messages.$inferSelect
 
@@ -34,7 +35,7 @@ export async function createChat(game: Game): Promise<string> {
   return newId
 }
 
-export async function loadChat(id: string): Promise<[Message[], string, string[]]> {
+export async function loadChat(id: string): Promise<[Message[], string, ToolName[]]> {
   const msgRes = await db.select().from(messages).where(eq(messages.chatId, id)).orderBy(asc(messages.createdAt))
   const retrievedMessages: Message[] = msgRes.map(msg => mapDbMsgToMessage(msg))
 
@@ -43,7 +44,7 @@ export async function loadChat(id: string): Promise<[Message[], string, string[]
     throw new Error(`Could not properly fetch system prompt for chat ${id}`)
   } else {
     const { prompt, tools } = chatRes[0]!
-    const toolsArr = tools as string[]
+    const toolsArr = tools as ToolName[]
     return [retrievedMessages, prompt!, toolsArr]
   }
 }

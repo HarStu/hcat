@@ -6,7 +6,8 @@ import { appendClientMessage } from 'ai';
 import { saveChat, loadChat } from '~/tools/chat-store'
 import { z } from 'zod';
 
-import { tools } from '~/lib/model_tools'
+import { model_tools } from '~/lib/model_tools'
+import type { ToolName } from '~/lib/model_tools'
 
 // Allowing streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -39,27 +40,15 @@ export async function POST(req: Request) {
     }
 
     // setup the tools available to the model
+    const toolList = Object.entries(model_tools)
+    const filteredToolList = toolList.filter(tool => requiredTools.includes(tool[0] as ToolName))
+    const useTools = Object.fromEntries(filteredToolList)
 
     const result = streamText({
       model: model,
       system: gamePrompt,
       messages,
-      tools: {
-        winTheGame: {
-          description: "Use when the player has achieved the goal described in the system prompt",
-          parameters: z.object({}),
-          execute: async ({ }) => {
-            return true
-          }
-        },
-        loseTheGame: {
-          description: "Use when the player has failed at the goal described in the system prompt, such that the scenairo cannot continue",
-          parameters: z.object({}),
-          execute: async ({ }) => {
-            return true
-          }
-        },
-      },
+      tools: useTools,
       experimental_generateMessageId: createIdGenerator({
         prefix: 'msgs',
         size: 16,

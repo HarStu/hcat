@@ -1,8 +1,10 @@
+import type { ToolName } from '~/lib/model_tools'
+
 export type Game = {
   name: string,
   description: string,
   systemPrompt: string
-  requiredTools: string[]
+  requiredTools: ToolName[]
 }
 
 export const gameConfigs: Game[] = [
