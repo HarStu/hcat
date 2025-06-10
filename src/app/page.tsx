@@ -14,7 +14,7 @@ function GameLink({ game }: { game: Game }) {
       <div>
         {game.description}
       </div>
-      <Link className="outline" href={{ pathname: "/chat", query: { gameName: game.name } }}>
+      <Link className="outline" href={`/play/${game.name}`}>
         play!
       </Link>
     </div >
