@@ -10,14 +10,14 @@ export default async function Home() {
   return (
     <HydrateClient>
       <main>
+        <h1>
+          Welcome to the interactive post-watergate experience
+        </h1>
         <div>
-          Welcome to Richard Nixon's Heroin Addiction Simulator. Powered by Hcat.
-        </div>
-        <div>
-          To proceed with your goal of trying to convince 'tricky dick' to quit his dope habit, please click below:
+          As a trusted staff, it is up to you to convince our 37th president to step down in the wake of the Watergate Scandal. Best of luck.
         </div>
         <Link className="outline" href="/chat">
-          here!
+          step into the oval office...
         </Link>
       </main>
     </HydrateClient>

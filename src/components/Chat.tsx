@@ -43,9 +43,9 @@ export default function Chat(chatProps: ChatProps = {}) {
 
   useEffect(() => {
     console.log('full messages content')
-    for (let msg of messages) {
-      if (msg['toolInvocations']) {
-        for (let toolUse of msg['toolInvocations']) {
+    for (const msg of messages) {
+      if (msg.toolInvocations) {
+        for (const toolUse of msg.toolInvocations) {
           if (toolUse.toolName == 'winTheGame') {
             setWin(true)
           }
