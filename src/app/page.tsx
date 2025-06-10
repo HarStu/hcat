@@ -8,7 +8,7 @@ import type { Game } from "~/lib/games";
 function GameLink({ game }: { game: Game }) {
   return (
     <div>
-      <div>
+      <div className="font-bold">
         {game.name}
       </div>
       <div>
