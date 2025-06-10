@@ -10,7 +10,7 @@ import { gameConfigs } from '~/lib/games';
 export default async function Page() {
   return (
     <div>
-      Error, you shouldn't be here
+      Error
     </div>
   )
 }
