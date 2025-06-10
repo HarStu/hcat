@@ -44,6 +44,8 @@ export async function POST(req: Request) {
     const filteredToolList = toolList.filter(tool => requiredTools.includes(tool[0] as ToolName))
     const useTools = Object.fromEntries(filteredToolList)
 
+    console.log(`System has access to the following tools: ${JSON.stringify(useTools)}`)
+
     const result = streamText({
       model: model,
       system: gamePrompt,
