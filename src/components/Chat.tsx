@@ -11,7 +11,6 @@ type ChatProps = {
   initialMessages?: Message[]
 }
 export default function Chat(chatProps: ChatProps = {}) {
-
   const { messages, input, handleInputChange, handleSubmit, status, stop, error, reload } = useChat({
     id: chatProps.id,
     initialMessages: chatProps.initialMessages,
