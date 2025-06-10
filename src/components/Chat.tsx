@@ -27,7 +27,6 @@ export default function Chat(chatProps: ChatProps = {}) {
         setWin(true)
         return true
       }
-      return true
     },
     experimental_prepareRequestBody({ messages, id }) {
       return { message: messages[messages.length - 1], id }
