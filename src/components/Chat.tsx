@@ -19,12 +19,15 @@ export default function Chat(chatProps: ChatProps = {}) {
       prefix: 'msgc',
       size: 16,
     }),
-    maxSteps: 5,
+    maxSteps: 1,
     async onToolCall({ toolCall }) {
       if (toolCall.toolName === 'winTheGame') {
         console.log("You win")
-        setWin(true)
+        setGameState('win')
         return true
+      } else if (toolCall.toolName == 'loseTheGame') {
+        console.log("You lose")
+        setGameState('lose')
       }
     },
     experimental_prepareRequestBody({ messages, id }) {
@@ -32,7 +35,8 @@ export default function Chat(chatProps: ChatProps = {}) {
     }
   })
 
-  const [win, setWin] = useState(false)
+  type GameState = 'win' | 'lose' | 'playing'
+  const [gameState, setGameState] = useState<GameState>('playing')
 
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
@@ -46,7 +50,9 @@ export default function Chat(chatProps: ChatProps = {}) {
       if (msg.toolInvocations) {
         for (const toolUse of msg.toolInvocations) {
           if (toolUse.toolName == 'winTheGame') {
-            setWin(true)
+            setGameState('win')
+          } else if (toolUse.toolName == 'loseTheGame') {
+            setGameState('lose')
           }
         }
       }
@@ -54,13 +60,23 @@ export default function Chat(chatProps: ChatProps = {}) {
   }, [messages])
 
   const buttonClass = 'flex px-2 min-w-16 border rounded items-center justify-center'
-  const messagesContainerClass = 'flex-1 border rounded p-4 mb-0 mt-4 overflow-y-auto transition-all duration-900 ease-in-out'
+  let messagesContainerClass = 'flex-1 border rounded p-4 mb-0 mt-4 overflow-y-auto transition-all duration-900 ease-in-out'
+  let inputPrompt = "Say something..."
+
+  // Configure the UI based on gameState
+  if (gameState == 'win') {
+    messagesContainerClass += ' border-green-500'
+    inputPrompt = "You Win!"
+  } else if (gameState == 'lose') {
+    messagesContainerClass += ' border-red-500'
+    inputPrompt = "You Lose!"
+  }
 
   const generating = (status === 'submitted' || status === 'streaming')
 
   return (
     <div className="flex flex-col w-full max-w-md mx-auto h-screen bg-background">
-      <div className={clsx((messagesContainerClass), win && 'border-green-500')}>
+      <div className={clsx(messagesContainerClass)}>
         {messages.map(m => (
           <div key={m.id} className="mb-4">
             <strong>{m.role}: </strong>
@@ -91,9 +107,9 @@ export default function Chat(chatProps: ChatProps = {}) {
         <input
           value={input}
           onChange={handleInputChange}
-          placeholder="Say something..."
+          placeholder={inputPrompt}
           className="flex-1 p-2 border rounded"
-          disabled={error != null}
+          disabled={error !== null && gameState !== 'playing'}
         />
         {(status === 'ready') ?
           (<button type='submit' className={buttonClass}>send</button>) :
