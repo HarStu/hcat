@@ -4,6 +4,8 @@ import { db } from '~/server/db/db'
 import { eq, asc } from 'drizzle-orm'
 import { chats, messages } from '~/server/db/schema'
 
+import type { Game } from '~/lib/games'
+
 type DbMessage = typeof messages.$inferSelect
 
 function mapDbMsgToMessage(dbMessage: DbMessage): Message {
@@ -17,22 +19,33 @@ function mapDbMsgToMessage(dbMessage: DbMessage): Message {
   }
 }
 
-export async function createChat(): Promise<string> {
+export async function createChat(game: Game): Promise<string> {
   // TEMP PLACEHOLDER -- SHOULD BE REPLACED WITH DB IMPLEMENTATION
   const newId = generateId()
 
   await db.insert(chats).values({
     id: newId,
-    createdAt: new Date()
+    createdAt: new Date(),
+    systemPrompt: game.systemPrompt,
+    gameName: game.name,
+    requiredTools: game.requiredTools
   })
 
   return newId
 }
 
-export async function loadChat(id: string): Promise<Message[]> {
-  const res = await db.select().from(messages).where(eq(messages.chatId, id)).orderBy(asc(messages.createdAt))
-  const retrievedMessages: Message[] = res.map(msg => mapDbMsgToMessage(msg))
-  return retrievedMessages
+export async function loadChat(id: string): Promise<[Message[], string]> {
+  const msgRes = await db.select().from(messages).where(eq(messages.chatId, id)).orderBy(asc(messages.createdAt))
+  const retrievedMessages: Message[] = msgRes.map(msg => mapDbMsgToMessage(msg))
+
+  const promptRes = await db.select({ prompt: chats.systemPrompt }).from(chats).where(eq(chats.id, id))
+  if (promptRes.length !== 1) {
+    throw new Error(`Could not properly fetch system prompt for chat ${id}`)
+  } else {
+    const { prompt } = promptRes[0]!
+
+    return [retrievedMessages, prompt!]
+  }
 }
 
 export async function saveChat({ id, newMessages }: { id: string, newMessages: Message[] }): Promise<void> {

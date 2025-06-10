@@ -29,19 +29,11 @@ export const posts = createTable(
 
 export const chats = pgTable('chats', {
   id: varchar({ length: 255 }).primaryKey(),
-  createdAt: timestamp({ withTimezone: true }).default(sql`CURRENT_TIMESTAMP`).notNull()
+  createdAt: timestamp({ withTimezone: true }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+  systemPrompt: varchar({ length: 4095 }),
+  gameName: varchar({ length: 15 }),
+  requiredTools: jsonb()
 });
-
-// export const message = pgTable('Message_v2', {
-//   id: uuid('id').primaryKey().notNull().defaultRandom(),
-//   chatId: uuid('chatId')
-//     .notNull()
-//     .references(() => chat.id),
-//   role: varchar('role').notNull(),
-//   parts: json('parts').notNull(),
-//   attachments: json('attachments').notNull(),
-//   createdAt: timestamp('createdAt').notNull(),
-// });
 
 export const messages = pgTable('messages', {
   id: varchar({ length: 255 }).primaryKey(),

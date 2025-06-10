@@ -1,6 +1,25 @@
 import { LatestPost } from "~/app/_components/post";
 import { api, HydrateClient } from "~/trpc/server";
 import Link from "next/link";
+import { gameConfigs } from "~/lib/games";
+import type { Game } from "~/lib/games";
+
+
+function GameLink({ game }: { game: Game }) {
+  return (
+    <div>
+      <div className="font-bold">
+        {game.name}
+      </div>
+      <div>
+        {game.description}
+      </div>
+      <Link className="outline" href={`/play/${game.name}`}>
+        play!
+      </Link>
+    </div >
+  )
+}
 
 export default async function Home() {
   const hello = await api.post.hello({ text: "from tRPC" });
@@ -11,14 +30,16 @@ export default async function Home() {
     <HydrateClient>
       <main className="flex flex-col items-center">
         <h1 className="font-bold">
-          Welcome to the interactive post-watergate experience
+          Welcome to Hcat
         </h1>
         <div>
-          As a trusted staffer, it is up to you to convince our 37th president to step down in the wake of the Watergate scandal. Best of luck.
+          the following games are available to play...
         </div>
-        <Link className="outline" href="/chat">
-          step into the oval office...
-        </Link>
+        <div>
+          {gameConfigs.map((game, index) => {
+            return <GameLink key={index} game={game} />
+          })}
+        </div>
       </main>
     </HydrateClient>
   );
