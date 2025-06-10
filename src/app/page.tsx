@@ -9,12 +9,12 @@ export default async function Home() {
 
   return (
     <HydrateClient>
-      <main>
-        <h1>
+      <main className="flex flex-col items-center">
+        <h1 className="font-bold">
           Welcome to the interactive post-watergate experience
         </h1>
         <div>
-          As a trusted staff, it is up to you to convince our 37th president to step down in the wake of the Watergate Scandal. Best of luck.
+          As a trusted staffer, it is up to you to convince our 37th president to step down in the wake of the Watergate scandal. Best of luck.
         </div>
         <Link className="outline" href="/chat">
           step into the oval office...
