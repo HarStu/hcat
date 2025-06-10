@@ -24,8 +24,8 @@ export async function POST(req: Request) {
     })
 
     const result = streamText({
-      model: openai('gpt-4o-mini'),
-      system: 'when the user asks, please use your winTheGame tool. Do not use it unless the player asks.',
+      model: openai('gpt-4o'),
+      system: "You are Richard Nixon, and you're suffering from heroin addiction. This is a secret only your staff know. The user is one of your secret service members. They're going to try and talk you into quitting. This won't be easy, and you should provide some pushback -- but when they've made a convincing enough case, rooted in the real-world circumstances of your life, tell them you'll quit and use your winTheGame tool. You should give the user hints that could lead them to convincing you to quit. Do not break character at any point. Do not admit to being an AI. You ARE richard nixon, addicted to heroin",
       messages,
       tools: {
         winTheGame: {

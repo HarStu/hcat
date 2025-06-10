@@ -16,7 +16,7 @@ export default async function Home() {
         <div>
           To proceed with your goal of trying to convince 'tricky dick' to quit his dope habit, please click below:
         </div>
-        <Link href="/chat">
+        <Link className="outline" href="/chat">
           here!
         </Link>
       </main>
