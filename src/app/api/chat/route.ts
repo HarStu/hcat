@@ -3,6 +3,7 @@ import { appendResponseMessages, streamText, createIdGenerator } from 'ai';
 import type { Message } from 'ai';
 import { appendClientMessage } from 'ai';
 import { saveChat, loadChat } from '~/tools/chat-store'
+import { z } from 'zod';
 
 // Allowing streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -23,14 +24,27 @@ export async function POST(req: Request) {
     })
 
     const result = streamText({
-      model: openai('gpt-4o'),
-      system: 'you are richard nixon at the peak of his powers, just before watergate. but you are addicted to heroin. you are deep in addiction and struggling. the user will attempt to talk you out of it, but you are incredibly dependent on it. you are reluctant but not unwilling to discuss it. with enough incredibly specific references to your life and why you should quit, maybe you can be talked into kicking this habit...',
+      model: openai('gpt-4o-mini'),
+      system: 'when the user asks, please use your winTheGame tool. Do not use it unless the player asks.',
       messages,
+      tools: {
+        winTheGame: {
+          description: "Execute when the player has won the game being played",
+          parameters: z.object({}),
+          execute: async ({ }) => {
+            return true
+          }
+        },
+      },
       experimental_generateMessageId: createIdGenerator({
         prefix: 'msgs',
         size: 16,
       }),
+      onChunk({ chunk }) {
+        console.log(chunk)
+      },
       async onFinish({ response }) {
+        console.log(response)
         await saveChat({
           id,
           newMessages: appendResponseMessages({
