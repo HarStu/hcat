@@ -59,7 +59,7 @@ export async function POST(req: Request) {
     // even when the client response is aborted 
 
     // toggling this appears to control the real-time stream?
-    result.consumeStream()
+    await result.consumeStream()
 
     return result.toDataStreamResponse()
   } else {
